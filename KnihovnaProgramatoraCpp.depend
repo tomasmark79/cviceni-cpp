@@ -1,0 +1,171 @@
+# depslib dependency file v1.0
+1702539544 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\main.cpp
+	<stdlib.h>
+	<iostream>
+	"cestina.h"
+	"zajimavosti.h"
+	"03_slozitejsi_programy.h"
+	"04_pokrocilejsi_konstrukce_a_techniky.h"
+	"06_zakladni_datove_typy.h"
+	"07_prikazy.h"
+	"09_prace_s_pameti.h"
+	"09_strom.h"
+	"10_vyctove_typy_struktury_a_unie.h"
+	"11_vyrazy.h"
+	"12_deklarace_a_promenne.h"
+	"13_funkce.h"
+	"14_program_a_jeho_beh.h"
+	"15_preprocesor.h"
+	"17_dedeni.h"
+
+1700465038 c:\projects\_windows projects\knihovnaprogramatorac++\cestina\cestina.h
+	<windows.h>
+	<string.h>
+	<stdlib.h>
+
+1701350248 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\02\prvni.cpp
+	"..\\main.cpp"
+	<iostream>
+
+1701350158 c:\projects\_cppmaster\knihovnaprogramatoracpp\02\prvni.cpp
+	<iostream>
+
+1701350283 c:\projects\_cppmaster\knihovnaprogramatoracpp\\main.cpp
+	<iostream>
+	"c:\Projects\_Windows Projects\KnihovnaProgramatoraC++\cestina\cestina.h"
+
+1701351096 c:\projects\_cppmaster\knihovnaprogramatoracpp\12\12_4_pole_ukazatelu_ukazatel_na_pole.h
+
+1701412706 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\12_deklarace_a_promenne.cpp
+	<iostream>
+	"12_deklarace_a_promenne.h"
+
+1701412704 c:\projects\_cppmaster\knihovnaprogramatoracpp\12_deklarace_a_promenne.h
+
+1701352262 c:\projects\_cppmaster\knihovnaprogramatoracpp\11_vyrazy.h
+
+1701352298 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\11_vyrazy.cpp
+	<iostream>
+	<limits>
+	"11_vyrazy.h"
+
+1702538474 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\04_pokrocilejsi_konstrukce_a_techniky.cpp
+	<iostream>
+	"04_pokrocilejsi_konstrukce_a_techniky.h"
+
+1702539143 c:\projects\_cppmaster\knihovnaprogramatoracpp\04_pokrocilejsi_konstrukce_a_techniky.h
+	<iostream>
+	<vector>
+	<string>
+
+1701355966 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\07_prikazy.cpp
+	<iostream>
+	"07_prikazy.h"
+
+1701355417 c:\projects\_cppmaster\knihovnaprogramatoracpp\07_prikazy.h
+	<iostream>
+
+1701357521 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\09_prace_s_pameti.cpp
+	<iostream>
+	<algorithm>
+	<cstring>
+	"09_prace_s_pameti.h"
+
+1701357406 c:\projects\_cppmaster\knihovnaprogramatoracpp\09_prace_s_pameti.h
+
+1701358250 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\10_vyctove_typy_struktury_a_unie.cpp
+	<iostream>
+	"10_vyctove_typy_struktury_a_unie.h"
+
+1701358131 c:\projects\_cppmaster\knihovnaprogramatoracpp\10_vyctove_typy_struktury_a_unie.h
+
+1701362170 c:\projects\_cppmaster\knihovnaprogramatoracpp\03_slozitejsi_programy.h
+
+1701362166 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\03_slozitejsi_programy.cpp
+	"03_slozitejsi_programy.h"
+	<iostream>
+	<cmath>
+
+1702030421 c:\projects\_cppmaster\knihovnaprogramatoracpp\06_zakladni_datove_typy.h
+	<iostream>
+
+1702029266 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\06_zakladni_datove_typy.cpp
+	<iostream>
+	"06_zakladni_datove_typy.h"
+	<limits>
+	<cmath>
+
+1701363007 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\09_strom.cpp
+	<iostream>
+	<limits>
+	"09_strom.h"
+
+1701363168 c:\projects\_cppmaster\knihovnaprogramatoracpp\09_strom.h
+	"09_uzel.h"
+
+1701362781 c:\projects\_cppmaster\knihovnaprogramatoracpp\09_uzel.h
+	<string>
+
+1700465038 c:\projects\_mojeuceniprogramovani\cestina.h
+	<windows.h>
+	<string.h>
+	<stdlib.h>
+
+1700465038 c:\projects\_cppmaster\knihovnaprogramatoracpp\cestina.h
+	<windows.h>
+	<string.h>
+	<stdlib.h>
+
+1701785882 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\13_funkce.cpp
+	<iostream>
+	<cstring>
+	<math.h>
+	<iomanip>
+	<algorithm>
+	<utility>
+	<tuple>
+	<experimental/tuple>
+	"13_funkce.h"
+	"06_zakladni_datove_typy.h"
+
+1701785702 c:\projects\_cppmaster\knihovnaprogramatoracpp\13_funkce.h
+
+1701792999 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\14_program_a_jeho_beh.cpp
+	<iostream>
+	"14_program_a_jeho_beh.h"
+
+1701792827 c:\projects\_cppmaster\knihovnaprogramatoracpp\14_program_a_jeho_beh.h
+
+1701811255 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\15_preprocesor.cpp
+	<iostream>
+	"15_preprocesor.h"
+
+1701807789 c:\projects\_cppmaster\knihovnaprogramatoracpp\15_preprocesor.h
+
+1702538385 c:\projects\_cppmaster\knihovnaprogramatoracpp\16_objektove_typy.h
+	<initializer_list>
+
+1702538516 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\16_objektove_typy.cpp
+	<iostream>
+	<vector>
+	<string>
+	<cstring>
+	<stdio.h>
+	"16_objektove_typy.h"
+	"zajimavosti.h"
+	"04_pokrocilejsi_konstrukce_a_techniky.h"
+
+1702494185 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\zajimavosti.cpp
+	<stdio.h>
+	<iostream>
+	"zajimavosti.h"
+
+1702539284 c:\projects\_cppmaster\knihovnaprogramatoracpp\zajimavosti.h
+	<cstring>
+
+1702539399 source:c:\projects\_cppmaster\knihovnaprogramatoracpp\17_dedeni.cpp
+	<iostream>
+	"zajimavosti.h"
+
+1702539349 c:\projects\_cppmaster\knihovnaprogramatoracpp\17_dedeni.h
+
