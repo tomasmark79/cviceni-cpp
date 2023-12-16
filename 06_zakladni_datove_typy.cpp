@@ -127,12 +127,12 @@ double sqr(double x)
     return x*x;
 }
 
-double vzdalenost(bod A, bod B)
+double vzdalenost(bod06 A, bod06 B)
 {
     return std::sqrt(sqr(A.x - B.x) + sqr(A.y + B.y));
 }
 
-double plocha_trojuhelnika(bod A, bod B, bod C)
+double plocha_trojuhelnika(bod06 A, bod06 B, bod06 C)
 {
     double a = vzdalenost(A, B);
     double b = vzdalenost(B, C);
@@ -141,7 +141,7 @@ double plocha_trojuhelnika(bod A, bod B, bod C)
     return sqrt(s*(s - a)*(s - b)*(s - c));
 }
 
-double obvod_trojuhelnika(bod A, bod B, bod C)
+double obvod_trojuhelnika(bod06 A, bod06 B, bod06 C)
 {
     double a = vzdalenost(A, B);
     double b = vzdalenost(B, C);
@@ -153,7 +153,7 @@ int vypis_plochy_a_obvodu_trojuhelnika()
 {
     cout << "Vypocet plochy trojuhelnika" << endl;
 
-    bod A{ 0,1 }, B{ 2,3 }, C{ 4,5 };
+    bod06 A{ 0,1 }, B{ 2,3 }, C{ 4,5 };
 
     cout << "Plocha daného trojúhelníka je " << plocha_trojuhelnika(A, B, C) << endl;
     cout << "Obvod daného trojúhelníka je " << obvod_trojuhelnika(A, B, C) << endl;

@@ -215,7 +215,7 @@ double plocha(double a, double b, double fi)
 {
     cout << "Volaná pøetížená funcke è. 2" << endl;
 } // 2
-double plocha(bod A, bod B, bod C)
+double plocha(bod06 A, bod06 B, bod06 C)
 {
     cout << "Volaná pøetížená funcke è. 3" << endl;
 } // 3

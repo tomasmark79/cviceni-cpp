@@ -9,7 +9,7 @@ int vypis_zaokrouhlovaci_chyby();
 void vypis_zaokrouhlovaci_priklady();
 int vypis_plochy_a_obvodu_trojuhelnika();
 
-class bod
+class bod06
 {
     double x, y;
     void set_x(double _x)
@@ -22,19 +22,19 @@ class bod
     }
 
 public:
-//    bod(double _x, double _y); // constructor
+//    bod06(double _x, double _y); // constructor
 //    {
 //        x = _x;
 //        y = _y;
 //    }
-//  bod(double _x, double _y) : x(_x), y(_y) {}
-    bod(double _x, double _y)
+//  bod06(double _x, double _y) : x(_x), y(_y) {}
+    bod06(double _x, double _y)
     {
         set_x(_x);
         set_y(_y);
     }
 
-    friend double vzdalenost(bod A, bod B);
+    friend double vzdalenost(bod06 A, bod06 B);
 };
 
 // sablony normalne patri do hlavickovych souboru

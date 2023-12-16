@@ -20,6 +20,8 @@
 
 using namespace std;
 
+//git push origin main
+
 #ifndef __cplusplus
 #  error C++ is required
 #elif __cplusplus <= 201103L
@@ -208,9 +210,18 @@ int main(int argc, char *argv[], char* env[])
 #endif
 #ifdef KAP17
     // 16
-    Tabs::printFunctionHeader("Kapitola 17:");
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 17: Start");
 
+//    vypis_oriznuti_objektu();
+//    vypis_vytvoreni_grafickeho_objektu();
+//    vypis_prirazovani_ukazatelu();
+    vypis_virtualni_metody();
+
+
+
+    Tabs::printFunctionHeader("Kapitola 17: Konec");
 #endif
 
-    return 0;
+     return 0;
 }
