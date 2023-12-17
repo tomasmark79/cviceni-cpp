@@ -310,9 +310,6 @@ auto vypis_printf() -> void
     printf("Poèet: %i, ypsilon: %i, cena: %f\n", i, y, cena);
 }
 
-
-
-
 //Pøi pøedávání vıpustkou probìhnou s celoèíselnımi parametry celoèíselná rozšíøení (take
 //znakové typy, vıètové typy, typy short a unsigned short se rozšíøí na int, pøíp. na unsigned int).
 

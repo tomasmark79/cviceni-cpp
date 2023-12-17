@@ -150,5 +150,6 @@ int hraj_hru_hadej_zvire()
     }
     while (mam_pokracovat("Mám hádat další zvíøe? "));
 
+
     return 0;
 }

@@ -1,24 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <string>
-#include <cstring>
-#include <stdio.h>
-
 #include "16_objektove_typy.h"
 #include "zajimavosti.h"
 #include "04_pokrocilejsi_konstrukce_a_techniky.h"
 
 using namespace std;
 // const int dim = 3;
-
-// Definièní deklaraci statické datové složky musíme uvést mimo tìlo tøídy.
-// Typicky ji zapisujeme do implementaèního souboru.
-// V ní klíèové slovo static neuvádíme; identifikátor statické složky v ní
-// musíme kvalifikovat jménem tøídy pomocí operátoru ::.
-// Tato definice mùže obsahovat inicializaci.
-int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
-
-
 
 //
 // PØÍKLAD 16.18: KONSTANTNÍ NÁPIS
@@ -34,6 +22,7 @@ auto vypis_konstantni_instance() -> void
 
     const Napis napis("Poklona");
     napis.vypis();
+
 }
 
 //
@@ -736,6 +725,9 @@ auto vypis_sprateleny_operator_plus() -> void
     for (int i{0}; i<dim; i++)
         cout << d.pole[i] << " ";
     cout << endl;
+
+
+
 
 }
 

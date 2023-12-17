@@ -99,6 +99,8 @@ auto vypis_druhou_mocninu_makrem() -> void
     cout << "__TIME__: " <<__TIME__ << endl;
     cout << "__FILE__: " <<__FILE__ << endl;
     cout << "__cplusplus: " <<__cplusplus << endl;
+
+
 #undef SQR
 
 

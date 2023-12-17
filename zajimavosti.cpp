@@ -1,18 +1,20 @@
-#include <stdio.h>
-#include <iostream>
 #include "zajimavosti.h"
+// #include <stdio.h>
+#include <iostream>
 
 using namespace std;
 
+
 Tabs::Tabs()
 {
+
 }
 Tabs::~Tabs()
 {
 }
 
-//
-static auto aput( char* c, char bg_col, char fg_col ) -> void
+
+void aput( char* c, char bg_col, char fg_col )
 {
     int bg, fg;
     if( bg_col > 7 ) bg = 100 + bg_col-8;
@@ -21,7 +23,7 @@ static auto aput( char* c, char bg_col, char fg_col ) -> void
     else             fg =  30 + fg_col;
     printf( "\033[%i;%im%s\033[0;0m", fg, bg, c );
 }
-auto print_colors() -> void
+void print_colors()
 {
     int bg, fg;
     for( fg = 0; fg <  8; fg += 1 ) aput("    ", fg, 0);

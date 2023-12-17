@@ -1,5 +1,7 @@
 #include <iostream>
 #include "10_vyctove_typy_struktury_a_unie.h"
+#include <stdint.h>
+
 
 using namespace std;
 

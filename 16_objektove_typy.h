@@ -46,7 +46,7 @@ public:
 
     friend auto spratelena_definice_tridy() -> void
     {
-        int a = 0;
+        ;// int a = 0;
     };
     friend class vektor16;
 };

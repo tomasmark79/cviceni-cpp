@@ -15,20 +15,39 @@
 #include "13_funkce.h"
 #include "14_program_a_jeho_beh.h"
 #include "15_preprocesor.h"
-// #include "16_objektove_typy.h"
+#include "16_objektove_typy.h"
 #include "17_dedeni.h"
 
 using namespace std;
 
 //git push origin main
 
-#ifndef __cplusplus
-#  error C++ is required
-#elif __cplusplus <= 201103L
-#  error C++14 is required
-#endif
+//#ifndef __cplusplus
+//#  error C++ is required
+//#elif __cplusplus <= 201103L
+//#  error C++14 is required
+//#endif
 
-// #define KAP4
+
+// Definièní deklaraci statické datové složky musíme uvést mimo tìlo tøídy.
+// Typicky ji zapisujeme do implementaèního souboru.
+// V ní klíèové slovo static neuvádíme; identifikátor statické složky v ní
+// musíme kvalifikovat jménem tøídy pomocí operátoru ::.
+// Tato definice mùže obsahovat inicializaci.
+int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
+
+//#define KAP3
+//#define KAP4
+//#define KAP6
+//#define KAP7
+//#define KAP9
+//#define KAP10
+//#define KAP11
+//#define KAP12
+//#define KAP13
+//#define KAP14
+//#define KAP15
+//#define KAP16
 #define KAP17
 
 // 2x funkce pro kapitola 14
@@ -213,15 +232,19 @@ int main(int argc, char *argv[], char* env[])
     Tabs::reset();
     Tabs::printFunctionHeader("Kapitola 17: Start");
 
-//    vypis_oriznuti_objektu();
-//    vypis_vytvoreni_grafickeho_objektu();
-//    vypis_prirazovani_ukazatelu();
-    vypis_virtualni_metody();
-
+    // vypis_oriznuti_objektu();
+    // vypis_vytvoreni_grafickeho_objektu();
+    // vypis_prirazovani_ukazatelu();
+    // vypis_upravujeme_tridy_grafickych_objektu();
+    // vypis_virtualni_destruktor();
+    // vypis_mazeme_graficky_objekt();
+    // vypis_mazeme_graficky_objekt_v_destruktoru();
+    vypis_lepsi_navrh();
 
 
     Tabs::printFunctionHeader("Kapitola 17: Konec");
-#endif
 
+
+#endif
      return 0;
 }
