@@ -178,10 +178,14 @@ auto zakladni_a_barevne_graficke_objekty_dynamicky() -> void
 	bod BB(321, 654, 987);
 	graficky_objekt *zachraneny_go = pgo; // jen z plezíru
         zachraneny_go->nakresli();
+
 	pgo = new usecka(AA, BB, 565); // Tím dojde ke "ztrátì" reference na objekt typu obrazek, který byl vytvoøen na prvním øádku.
 	pgo->nakresli();
-    // */
 
+	// vytváøení bezbarvého objektu
+    pgo = new zakladni_usecka(zakladni_bod(3, 4), zakladni_bod(8, 9)); // zase ztráta
+    pgo->nakresli();
+    // */
 
 	delete pgo;
 }

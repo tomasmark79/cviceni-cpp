@@ -28,8 +28,10 @@ auto vypis_konstantni_instance() -> void
 //
 // PØÍKLAD 16.17: IMAGINÁRNÍ JEDNOTKA
 //
+
 const komplex16 komplex16::i{ 0, 1 };
 const komplex16 komplex16::nula{ 0, 0 };
+
 
 auto vypis_imaginarni_jednotka() -> void
 {
@@ -331,20 +333,23 @@ auto vypis_pole_komplexnich_cisel() -> void
 komplex16::komplex16(double _re, double _im)
     : re(_re), im(_im)
 {
-    Tabs::printLine("komplex16::komplex16(double _re, double _im)");
+    // vypnuto aby nerušilo ostatní pøíklady
+    // Tabs::printLine("komplex16::komplex16(double _re, double _im)");
     Tabs::addTab();
 }
 
 
 komplex16 komplex16::plus(komplex16 a)
 {
-    Tabs::printLine("komplex16 komplex16::plus(komplex16 a)");
+    // vypnuto aby nerušilo ostatní pøíklady
+    // Tabs::printLine("komplex16 komplex16::plus(komplex16 a)");
     return komplex16(re + a.re, im + a.im);
 }
 
 komplex16::~komplex16()
 {
-    Tabs::printLine("komplex16::~komplex16()");
+    // vypnuto aby nerušilo ostatní pøíklady
+    // Tabs::printLine("komplex16::~komplex16()");
     Tabs::decTab();
 }
 

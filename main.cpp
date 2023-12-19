@@ -18,6 +18,8 @@
 #include "16_objektove_typy.h"
 #include "17_dedeni.h"
 #include "17_zakladni_a_barevne_graficke_objekty.h"
+#include "18_chyby_za_behu_programu.h"
+
 
 using namespace std;
 
@@ -49,7 +51,8 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP14
 //#define KAP15
 //#define KAP16
-#define KAP17
+//#define KAP17
+#define KAP18
 
 // 2x funkce pro kapitola 14
 void fce1()
@@ -233,7 +236,15 @@ int main(int argc, char *argv[], char* env[])
     Tabs::printFunctionHeader("Kapitola 17: Start");
 
     zakladni_a_barevne_graficke_objekty_staticky();
+
     zakladni_a_barevne_graficke_objekty_dynamicky();
+#endif
+
+#ifdef KAP18
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 18: Start");
+    cout << endl;
+    vypis_vstupni_a_vystupni_podminky();
 
 #endif
      return 0;
