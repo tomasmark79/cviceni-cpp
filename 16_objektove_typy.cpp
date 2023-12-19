@@ -632,7 +632,7 @@ bod16::bod16(double _x, double _y)
     set_y(_y);
 }
 
-usecka::usecka(double x1, double y1, double x2, double y2)
+usecka16::usecka16(double x1, double y1, double x2, double y2)
     : pocatek{x1, y1}, konec{x2,y2}
 {
     // tìlo zde není dùležité

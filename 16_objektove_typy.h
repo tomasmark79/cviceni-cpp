@@ -175,12 +175,12 @@ public:
 // ...a další složky...
 };
 
-class usecka
+class usecka16
 {
     bod16 pocatek;
     bod16 konec;
 public:
-    usecka(double x1, double y1, double x2, double y2);
+    usecka16(double x1, double y1, double x2, double y2);
     // ...a další složky...
 };
 

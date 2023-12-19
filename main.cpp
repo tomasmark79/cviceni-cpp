@@ -17,6 +17,7 @@
 #include "15_preprocesor.h"
 #include "16_objektove_typy.h"
 #include "17_dedeni.h"
+#include "17_zakladni_a_barevne_graficke_objekty.h"
 
 using namespace std;
 
@@ -228,22 +229,11 @@ int main(int argc, char *argv[], char* env[])
 
 #endif
 #ifdef KAP17
-    // 16
     Tabs::reset();
     Tabs::printFunctionHeader("Kapitola 17: Start");
 
-    // vypis_oriznuti_objektu();
-    // vypis_vytvoreni_grafickeho_objektu();
-    // vypis_prirazovani_ukazatelu();
-    // vypis_upravujeme_tridy_grafickych_objektu();
-    // vypis_virtualni_destruktor();
-    // vypis_mazeme_graficky_objekt();
-    // vypis_mazeme_graficky_objekt_v_destruktoru();
-    vypis_lepsi_navrh();
-
-
-    Tabs::printFunctionHeader("Kapitola 17: Konec");
-
+    zakladni_a_barevne_graficke_objekty_staticky();
+    zakladni_a_barevne_graficke_objekty_dynamicky();
 
 #endif
      return 0;
