@@ -19,7 +19,7 @@
 #include "17_dedeni.h"
 #include "17_zakladni_a_barevne_graficke_objekty.h"
 #include "18_chyby_za_behu_programu.h"
-
+#include "19_vstupy_a_vystupy.h"
 
 using namespace std;
 
@@ -52,7 +52,8 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP15
 //#define KAP16
 //#define KAP17
-#define KAP18
+//#define KAP18
+#define KAP19
 
 // 2x funkce pro kapitola 14
 void fce1()
@@ -244,7 +245,16 @@ int main(int argc, char *argv[], char* env[])
     Tabs::reset();
     Tabs::printFunctionHeader("Kapitola 18: Start");
     cout << endl;
-    vypis_vstupni_a_vystupni_podminky();
+    //vypis_vstupni_a_vystupni_podminky();
+    //vypis_zachyceni_vyjimky();
+    vypis_uklid_pomoci_destruktoru_a_chytre_ukazatele();
+    vypis_funkce_z_niz_se_nemuze_sirit_vyjimka();
+#endif
+#ifdef KAP19
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 19: Vstupy a výstupy");
+    cout << endl;
+    vstupy_vystupy();
 
 #endif
      return 0;

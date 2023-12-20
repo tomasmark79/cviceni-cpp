@@ -1,6 +1,8 @@
 #include <iostream>
+#include <iomanip>
 #include <assert.h>
 #include <limits>
+#include <memory>
 #include "18_chyby_za_behu_programu.h"
 
 using namespace std;
@@ -13,15 +15,17 @@ using namespace std;
 // PØÍKLAD 18.3: DETEKCE CELOÈÍSLENÉHO PØETEÈENÍ
 //
 
-int bezpecny_soucet(int a, int b)
+template<typename T>
+T bezpecny_soucet(T a, T b)
+// int bezpecny_soucet(int a, int b)
 {
-    if ((a > 0) && (b > numeric_limits<int>::max() - a))
+    if ((a > 0) && (b > numeric_limits<T>::max() - a))
     {
-        throw overflow_error("Výsledek > INT_MAX");
+        throw overflow_error("Výsledek > <T>");
     }
-    if ((a < 0) && (b < numeric_limits<int>::min() + a))
+    if ((a < 0) && (b < numeric_limits<T>::min() + a))
     {
-        throw overflow_error("Výsledek < INT_MIN");
+        throw overflow_error("Výsledek < <T>");
     }
     return a + b;
 }
@@ -129,8 +133,8 @@ auto vypis_vstupni_a_vystupni_podminky() -> void
 //    cout << "faktorial_18_2(" << FAKT_TEST_NR_OUTOR << ") = "
 //         << faktorial_18_2(FAKT_TEST_NR_OUTOR) << endl;
 
-//    cout << "bezpecny_soucet: " << " = "
-//         << bezpecny_soucet(1234567890123, 1234567890123) << endl;
+    cout << "bezpecny_soucet: " << " = "
+         << bezpecny_soucet<long long int>(1234567890123888, -6445645545454545) << endl;
 
 //    cout << "bezpecny_rozdil: " << " = "
 //         << bezpecny_rozdil(-1234567890123, 1234567890123) << endl;
@@ -141,10 +145,101 @@ auto vypis_vstupni_a_vystupni_podminky() -> void
 //    cout << "bezpecny_podil: " << " = "
 //         << bezpecny_podil(5, 0) << endl;
 
-    cout << "faktorial_18_3(" << FAKT_TEST_NR_OUTOR << ") = "
-         << faktorial_18_3(FAKT_TEST_NR_OUTOR) << endl;
+//    cout << "faktorial_18_3(" << FAKT_TEST_NR_OUTOR << ") = "
+//         << faktorial_18_3(FAKT_TEST_NR_OUTOR) << endl;
 
 // Poznamenejme, že kdybychom chtìli funkce pro bezpeèné aritmetické operace uložit do knihovny,
 // naprogramovali bychom je jako šablony sparametrem pøedstavujícím typ operandù.
 
+}
+
+//
+// PØÍKLAD 18.5: BÌH PROGRAMU S VÝJIMKAMI
+//
+
+//
+// PØÍKLAD 18.4: ZACHYCENÍ VÝJIMKY
+//
+
+void vypis_18_4(int od, int po)
+{
+    for (int i = od; i < po + 1; i++)
+    {
+        try
+        {
+            cout << setw(3) << i << ": ";
+            cout << setw(11) << faktorial_18_3(i);
+            cout << ";" << endl;
+        }
+        catch (exception &e) // exception je pøedkem invalid_argument, overflow_error a dalších ...
+        {
+            cout << e.what() << endl;
+        }
+    }
+}
+
+auto vypis_zachyceni_vyjimky() -> void
+{
+    vypis_18_4(-2, 13);
+}
+
+//
+// PØÍKLAD 18.6: ÚKLID POMOCÍ DESTRUKTORÙ
+//
+void zpracuj18_6_1(int *p, int n)
+{
+    cout << "znak: " << p[0] << " délka: " << n << endl;
+}; // Prototyp funkce pro zpracování
+void vypis18_6_1(int *p, int n)
+{
+    cout << "znak: " << p[0] << " délka: " << n << endl;
+}; // a výpis pole
+
+void pokus18_6_1(int n)
+{
+    int *pole = new int[n] {}; // Inicializace nulami
+    zpracuj18_6_1(pole, n);
+    vypis18_6_1(pole, n);
+    delete [] pole;
+}
+
+// Kód založený na chytrých ukazatelích mùže vypadat takto:
+void zpracuj18_6_2(unique_ptr<int[]> &p, int n)
+{
+    cout << "znak: " << p[0] << " délka: " << n << endl;
+};
+void vypis18_6_2(unique_ptr<int[]> &p, int n)
+{
+    cout << "znak: " << p[0] << " délka: " << n << endl;
+};
+
+void pokus18_6_2(int n)
+{
+    unique_ptr<int[]> pole{ new int[n] {0} };
+    zpracuj18_6_2(pole, n);
+    vypis18_6_2(pole, n);
+}
+
+auto vypis_uklid_pomoci_destruktoru_a_chytre_ukazatele() -> void
+{
+    pokus18_6_1(100);
+    pokus18_6_2(100);
+}
+
+//
+// PØÍKLAD 18.7: FUNKCE, Z NÍŽ SE NEMÙŽE ROZŠÍØIT VÝJIMKA
+//
+
+void vypis_18_7(unique_ptr<int[]> &pole, int n) noexcept(false)
+{
+    cout << "// PØÍKLAD 18.7: FUNKCE, Z NÍŽ SE NEMÙŽE ROZŠÍØIT VÝJIMKA" << endl;
+    for (int i = 0; i < n; i++)
+        cout << pole[i] << endl;
+}
+
+auto vypis_funkce_z_niz_se_nemuze_sirit_vyjimka() -> void
+{
+    const int n {5};
+    unique_ptr<int[]> pole{ new int[10] {9,8,7,6,5} };
+    vypis_18_7(pole, n);
 }
