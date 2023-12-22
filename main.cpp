@@ -20,6 +20,7 @@
 #include "17_zakladni_a_barevne_graficke_objekty.h"
 #include "18_chyby_za_behu_programu.h"
 #include "19_vstupy_a_vystupy.h"
+#include "19_vstupy_a_vystupy_print.h"
 
 using namespace std;
 
@@ -68,6 +69,7 @@ void fce2()
 int main(int argc, char *argv[], char* env[])
 {
     zarid_cestinu();
+    char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
     // print_colors();
 
 #ifdef KAP3
@@ -255,6 +257,7 @@ int main(int argc, char *argv[], char* env[])
     Tabs::printFunctionHeader("Kapitola 19: Vstupy a výstupy");
     cout << endl;
     vstupy_vystupy();
+    vstupy_vystupy_print();
 
 #endif
      return 0;
