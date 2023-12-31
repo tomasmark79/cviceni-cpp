@@ -5,6 +5,9 @@
 
 using namespace std;
 
+
+
+
 // auto print_colors() -> void;
 
 class Tabs
@@ -70,6 +73,8 @@ public:
     }
     static void printLine(string str_line)
     {
+
+
         cout << getTabChars() << str_line;
         cout << endl;
     }

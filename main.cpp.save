@@ -75,7 +75,7 @@ int main(int argc, char *argv[], char* env[])
     // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
     // nejsou pargametry programu. Tyto pøíkazy zpracuje
     // operaèní systém pøed spuštìním programu.
-
+    
     volba zjistena_volba(argc, argv);
     tridic radic;
     radic.zpracuj(zjistena_volba.zvoleno());

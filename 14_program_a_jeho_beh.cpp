@@ -9,6 +9,15 @@ int main(int argv);
 int main(int argv, char *argc);
 int main(int argv, char *argc[], char* env[]); // Nestandardní rozšíøení
 */
+void fce1()
+{
+    std::cout << "ukonèovací práce: fce1" << std::endl;
+};
+void fce2()
+{
+    std::cout  << "ukonèovací práce: fce2" << std::endl;
+};
+
 
 void ukonceni_app()
 {
