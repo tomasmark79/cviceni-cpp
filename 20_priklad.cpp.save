@@ -5,17 +5,18 @@ using namespace std;
 
 // Members of Class volba
 
-string volba::text_napovedy = R"(
+string volba::text_napovedy = retezec_Cp1250_na_string_Cp852(R"(
 SORT - program pro seøazení øádek daného souboru. Použití:
 sort volba < vstupní-soubor > výstupní-soubor
 Možné volby:
 -n nebo /n øazení podle èísel na poèátcích øádek
 -l nebo /l lexikografické øazení
 (C) Piškvorky software 2017
-)";
+)");
 
-wstring volba::text_napovedy_wide = LR"(widechar retezec - SORT)";
-azení øádek daného souboru. Použití:
+/* toto použití øetìzcù s jinými než ASCII znaky není doporuèené!
+wstring volba::text_napovedy_wide = R"(
+SORT - program pro seøazení øádek daného souboru. Použití:
 sort volba < vstupní-soubor > výstupní-soubor
 Možné volby:
 -n nebo /n øazení podle èísel na poèátcích øádek
@@ -24,6 +25,7 @@ Možné volby:
 )";
 */
 
+
 [[noreturn]]
 void volba::napoveda()
 {
@@ -31,12 +33,14 @@ void volba::napoveda()
     cerr << text_napovedy << endl;
 
     // toto nastaví výchozí hodnotu
+    /*
     wcerr.imbue(std::locale(""));
     wcerr.imbue(std::locale("C"));
     wcerr.imbue(std::locale("POSIX"));
-    wcerr << text_napovedy_wide << endl;
+    */
+    // wcerr << text_napovedy_wide << endl;
 
-    obnov_puvodni_nastaveni_konzoly();
+    // obnov_puvodni_nastaveni_konzoly();
     exit(1);
 
 }
@@ -49,25 +53,27 @@ volba::volba(int argc, char **argv)
     switch (argv[1][1])
     {
     case 'l':
-        zjistena_volba = lexikograficky;
+        // zjistena_volba = lexikograficky;
+        komparator = lexikograficky;
         return;
     case 'n':
-        zjistena_volba = numericky;
+        // zjistena_volba = numericky;
+        komparator = podle_cisel;
         return;
     default:
         napoveda(); // program exit
     }
 }
-volba::zvoleno_t volba::zvoleno()
+volba::u_komparator volba::zvoleno()
 {
-    return zjistena_volba;
+    return komparator;
 }
 
 // Members of Class tridic
-void tridic::zpracuj(volba::zvoleno_t zvoleno)
+void tridic::zpracuj(volba::u_komparator komparator)
 {
     nacti();
-    serad(zvoleno);
+    serad(komparator);
     vypis();
 }
 
@@ -79,16 +85,17 @@ void tridic::nacti()
     }
 }
 
-void tridic::serad(volba::zvoleno_t zvoleno)
+void tridic::serad(volba::u_komparator komparator)
 {
-    if(zvoleno == volba::lexikograficky)
-    {
-        sort(soubor.begin(), soubor.end());
-    }
-    else if (zvoleno == volba::numericky) // elseif jen tak :-)
-    {
-        sort(soubor.begin(), soubor.end(), podle_cisel);
-    }
+//
+//    if(zvoleno == volba::lexikograficky)
+//    {
+//        sort(soubor.begin(), soubor.end());
+//    }
+//    else if (zvoleno == volba::numericky) // elseif jen tak :-)
+//    {
+//        sort(soubor.begin(), soubor.end(), podle_cisel);
+//    }
 }
 
 void tridic::vypis()

@@ -2,7 +2,7 @@
 
 bool lexikograficky(string lajna1, string lajna2)
 {
-    return lajna1 < lajna2;
+return lajna1 < lajna2;
 }
 
 bool podle_cisel(string lajna1, string lajna2)

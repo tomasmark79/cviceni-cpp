@@ -1,10 +1,7 @@
-#include <iostream>
 #include "20_priklad.h"
-// #include <cstring>
 using namespace std;
 
 // Members of Class volba
-
 string volba::text_napovedy = retezec_Cp1250_na_string_Cp852(R"(
 SORT - program pro seøazení øádek daného souboru. Použití:
 sort volba < vstupní-soubor > výstupní-soubor
@@ -13,18 +10,6 @@ Možné volby:
 -l nebo /l lexikografické øazení
 (C) Piškvorky software 2017
 )");
-
-/* toto použití øetìzcù s jinými než ASCII znaky není doporuèené!
-wstring volba::text_napovedy_wide = R"(
-SORT - program pro seøazení øádek daného souboru. Použití:
-sort volba < vstupní-soubor > výstupní-soubor
-Možné volby:
--n nebo /n øazení podle èísel na poèátcích øádek
--l nebo /l lexikografické øazení
-(C) Piškvorky software 2017
-)";
-*/
-
 
 [[noreturn]]
 void volba::napoveda()
@@ -53,25 +38,25 @@ volba::volba(int argc, char **argv)
     switch (argv[1][1])
     {
     case 'l':
-        zjistena_volba = lexikograficky;
+        komparator = lexikograficky;
         return;
     case 'n':
-        zjistena_volba = numericky;
+        komparator = podle_cisel;
         return;
     default:
         napoveda(); // program exit
     }
 }
-volba::zvoleno_t volba::zvoleno()
+volba::u_komparator volba::zvoleno()
 {
-    return zjistena_volba;
+    return komparator;
 }
 
 // Members of Class tridic
-void tridic::zpracuj(volba::zvoleno_t zvoleno)
+void tridic::zpracuj(volba::u_komparator komparator)
 {
     nacti();
-    serad(zvoleno);
+    serad(komparator);
     vypis();
 }
 
@@ -83,16 +68,9 @@ void tridic::nacti()
     }
 }
 
-void tridic::serad(volba::zvoleno_t zvoleno)
+void tridic::serad(volba::u_komparator komparator)
 {
-    if(zvoleno == volba::lexikograficky)
-    {
-        sort(soubor.begin(), soubor.end());
-    }
-    else if (zvoleno == volba::numericky) // elseif jen tak :-)
-    {
-        sort(soubor.begin(), soubor.end(), podle_cisel);
-    }
+    sort(soubor.begin(), soubor.end(), komparator);
 }
 
 void tridic::vypis()
@@ -102,43 +80,3 @@ void tridic::vypis()
         cout << lajna << endl;
     }
 }
-
-
-//// moje úprava
-//void tridic::zpracuj_muj()
-//{
-//    string jmeno = "cz.txt";
-//    string jmenoVystup = "cz-sorted.txt";
-//    ifstream vstup(jmeno);
-//    if (!vstup)
-//    {
-//        cerr << "Nepodaøilo se otevøít soubor " << jmeno << endl;
-//        return;
-//    }
-//
-//    cout << "reading..." << endl;
-//    while (getline(vstup, radka))
-//    {
-//        soubor.push_back(radka); // uloží **kopii** pøedané instance
-//    }
-//
-//    cout << "sorting..." << endl;
-//    sort(soubor.begin(), soubor.end());
-//    cout << "sorted..." << endl;
-//    ofstream vystup(jmenoVystup);
-//    if (!vystup)
-//    {
-//        cerr << "Nepodaøilo se otevøít soubor " << jmenoVystup << endl;
-//        return;
-//    }
-//
-//    cout << "writting..." << endl;
-//    for(auto lajna: soubor)
-//    {
-//        vystup << lajna << endl;
-//    }
-//
-//    cout << "written..." << endl;
-//}
-
-
