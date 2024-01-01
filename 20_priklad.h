@@ -7,6 +7,7 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <map>
 
 #include "20_komparatory.h"
 
@@ -26,9 +27,11 @@ public:
     u_komparator zvoleno(); // get zvoleno
 
 private:
+    static map<string, u_komparator> tabulka_voleb;
     u_komparator komparator;
     static string text_napovedy;
     static wstring text_napovedy_wide;
+
 };
 
 // Declaration of Class tridic
