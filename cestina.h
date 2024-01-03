@@ -5,8 +5,8 @@
 #include <stdlib.h>
 #include <algorithm>
 #include <string>
+#include <math.h>
 
-using std::string;
 using namespace std;
 
 // using std::transform;
@@ -29,10 +29,10 @@ void nastav_konzolu_pro_cp1250()
     cfi.cbSize = sizeof cfi;
     cfi.nFont = 0;
     cfi.dwFontSize.X = 0;
-    cfi.dwFontSize.Y = 14;
+    cfi.dwFontSize.Y = 18;
     cfi.FontFamily = FF_DONTCARE;
     cfi.FontWeight = FW_NORMAL;
-    wcscpy_s(cfi.FaceName, L"Lucida Console");
+    wcscpy_s(cfi.FaceName, L"Cascadia Mono");
     SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), false, &cfi);
     system("CHCP 1250 > NUL");
 }
@@ -43,12 +43,26 @@ void nastav_rastr()
     cfi.cbSize = sizeof cfi;
     cfi.nFont = 0;
     cfi.dwFontSize.X = 0;
-    cfi.dwFontSize.Y = 14;
+    cfi.dwFontSize.Y = 18;
     cfi.FontFamily = FF_DONTCARE;
     cfi.FontWeight = FW_NORMAL;
-    wcscpy_s(cfi.FaceName, L"Terminal");
+    wcscpy_s(cfi.FaceName, L"Cascadia Mono");
     SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), false, &cfi);
     system("CHCP 852 > NUL");
+}
+
+void nastav_rastr_cascadia()
+{
+    CONSOLE_FONT_INFOEX cfi;
+    cfi.cbSize = sizeof cfi;
+    cfi.nFont = 0;
+    cfi.dwFontSize.X = 0;
+    cfi.dwFontSize.Y = 18;
+    cfi.FontFamily = FF_DONTCARE;
+    cfi.FontWeight = FW_NORMAL;
+    wcscpy_s(cfi.FaceName, L"Cascadia Mono");
+    SetCurrentConsoleFontEx(GetStdHandle(STD_OUTPUT_HANDLE), false, &cfi);
+    system("CHCP 65001 > NUL");
 }
 
 void obnov_puvodni_nastaveni_konzoly()
@@ -114,4 +128,37 @@ string string_Cp1250_na_string_Cp852( string text_1250 )
     return vysledek;
 }
 
+
+double logaritmus(double x)
+{
+    double y;
+    y = log(x);
+
+    switch (errno) {
+    case 0:
+        perror(NULL);
+        printf("log(%f) = %f.\n", x, y);
+        return y;
+    default:
+        perror("Hlaseni");
+        return 0;
+    }
+}
+
+void test_vystup() {
+    printf("Cislo 10000/3 = %f\n", 10000.0/3);
+    (void) logaritmus(-5);
+    (void) logaritmus(0);
+}
+
+void printf_locale_vystup() {
+    printf("* Aktualne nastavene locale LC_ALL: %s\n", setlocale(LC_ALL, NULL));
+    test_vystup();
+
+    printf("* Locale LC_ALL nastaveno na: %s\n", setlocale(LC_ALL,""));
+    test_vystup();
+
+    printf("* Locale LC_NUMERIC nastaveno na %s\n", setlocale(LC_NUMERIC,"C"));
+    test_vystup();
+}
 #endif // CESTINA_H_INCLUDED

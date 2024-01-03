@@ -1,23 +1,65 @@
+#include <Windows.h>
 #include "20_priklad.h"
+#include <fcntl.h>
+
 using namespace std;
 
 // Members of Class volba
-string volba::text_napovedy = retezec_Cp1250_na_string_Cp852(R"(
+
+// surový øetìzecový literál v ANSI
+string volba::text_napovedy_cz = R"(
+CP1250
 SORT - program pro seøazení øádek daného souboru. Použití:
 sort volba < vstupní-soubor > výstupní-soubor
 Možné volby:
 -n nebo /n øazení podle èísel na poèátcích øádek
 -l nebo /l lexikografické øazení
-(C) Piškvorky software 2017
+-a nebo /a abecední øazení
+)";
+
+// øetìzec pøeveden funkcí
+string volba::text_napovedy_v_852 = retezec_Cp1250_na_string_Cp852(R"(
+CP852
+SORT - program pro seøazení øádek daného souboru. Použití:
+sort volba < vstupní-soubor > výstupní-soubor
+Možné volby:
+-n nebo /n øazení podle èísel na poèátcích øádek
+-l nebo /l lexikografické øazení
+-a nebo /a abecední øazení
 )");
 
 [[noreturn]]
 void volba::napoveda()
 {
     // nastav_konzolu_pro_cp1250();
-    cerr << text_napovedy << endl;
+    // pøidáno cestou - není z uèebnice
+    // SetConsoleOutputCP(CP_UTF8); // nasatví na výstupu utf8
 
-    // toto nastaví výchozí hodnotu
+    // CZ pro ANSI
+    nastav_konzolu_pro_cp1250(); // èeské prostøedí
+    cerr << text_napovedy_cz << endl;
+    obnov_puvodni_nastaveni_konzoly();
+
+    // CZ pro ANSI
+    cerr << text_napovedy_v_852 << endl;
+
+//    // UK pro UTF-8
+//    setlocale(LC_ALL, "Russian");
+//    SetConsoleOutputCP(866);
+//    wcerr << text_napovedy_uk;
+//
+//    // CZ pro UTF-8
+//    setlocale(LC_ALL, "Czech");
+//    SetConsoleOutputCP(1250);
+//    wcerr << text_napovedy_wide;
+
+
+    // wcerr.imbue(std::locale(""));
+    // nastav_rastr_cascadia();
+    // wcerr << text_napovedy_uk << endl;
+    // wcerr << text_napovedy_wide << endl;
+    // printf_locale_vystup();
+    // toto nastaví‚ nastaví výchozí hodnotu
     /*
             wcerr.imbue(std::locale(""));
             wcerr.imbue(std::locale("C"));
@@ -27,37 +69,24 @@ void volba::napoveda()
 
     // obnov_puvodni_nastaveni_konzoly();
     exit(1);
-
 }
 
 // asociativní kontejner
 map<string, volba::u_komparator> volba::tabulka_voleb
 {
-    {"-l", lexikograficky}, {"-n", podle_cisel},
+    {"-l", lexikograficky},
+    {"-n", podle_cisel},
+    {"-a", alfabeticky}
 };
 
-//// Toto je možnost s lambda výrazem, jen pro ukázku
-//map<string, volba::u_komparator> volba::tabulka_voleb
-//{
-//    {
-//        "-l", [](string lajna1, string lajna2)->bool
-//        {
-//            return lajna1 < lajna2;
-//        }
-//    },
-//    {
-//        "-n", podle_cisel
-//    },
-//};
-
-// nový zpùsob s asociativním kontejnerem
+// novÄ‚Ë zpÄ¹Å»sob s asociativnÄ‚Â­m kontejnerem
 volba::volba(int argc, char **argv)
 {
     try
     {
         if (argc != 2)
         {
-            throw runtime_error("Špatný poèet parametrù!");
+            throw runtime_error("!");
         }
         if (argv[1][0] == '/')
         {
@@ -71,30 +100,12 @@ volba::volba(int argc, char **argv)
     }
 }
 
-// starý zpùsob bez asociativního kontejneru
-//volba::volba(int argc, char **argv)
-//{
-//    if (argc != 2)
-//        napoveda(); // program exit
-//    if ((argv[1][0] != '-') && (argv[1][0] != '/')) //viz 14.1.3
-//        napoveda(); // program exit
-//    switch (argv[1][1])
-//    {
-//    case 'l':
-//        komparator = lexikograficky;
-//        return;
-//    case 'n':
-//        komparator = podle_cisel;
-//        return;
-//    default:
-//        napoveda(); // program exit
-//    }
-//}
-
 volba::u_komparator volba::zvoleno()
 {
     return komparator;
 }
+
+
 
 // Members of Class tridic
 void tridic::zpracuj(volba::u_komparator komparator)
@@ -102,7 +113,10 @@ void tridic::zpracuj(volba::u_komparator komparator)
     nacti();
     serad(komparator);
     vypis();
+
 }
+
+
 
 void tridic::nacti()
 {
@@ -111,6 +125,7 @@ void tridic::nacti()
         soubor.push_back(radka);
     }
 }
+
 
 void tridic::serad(volba::u_komparator komparator)
 {
@@ -124,3 +139,4 @@ void tridic::vypis()
         cout << lajna << endl;
     }
 }
+

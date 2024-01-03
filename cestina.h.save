@@ -3,11 +3,13 @@
 
 #include <windows.h>
 #include <stdlib.h>
-#include <utility>
+#include <algorithm>
 #include <string>
+#include <math.h>
 
-using std::string;
-using std::transform;
+using namespace std;
+
+// using std::transform;
 
 CONSOLE_FONT_INFOEX cf_puvodni;
 BOOL nastaveno = false;
@@ -89,6 +91,11 @@ char znak_Cp1250_do_Cp852(unsigned char znak)
     }
 }
 
+//Tato funkce pøeloí bez problémù bìnı èeskı nebo slovenskı text, nebo všechna písmena sdiakritickımi
+//znaménky jsou souèástí obou kódovıch stránek; nìkteré zvláštní znaky, jako je © nebo ®, však pøeloí
+//nesprávnì, nebo nejsou souèástí kódové stránky 852. Naše funkce tam pro nì vrátí jakési zástupné znaky,
+//které by nesplnily svùj úèel, aproto jsme v nápovìdì místo znaku autorskıch práv pouili zástupné znaky
+//(C).
 string retezec_Cp1250_na_string_Cp852(const char *text_napovedy_1250)
 {
     string vysledek;
@@ -102,9 +109,42 @@ string retezec_Cp1250_na_string_Cp852(const char *text_napovedy_1250)
 string string_Cp1250_na_string_Cp852( string text_1250 )
 {
     string vysledek(text_1250.size(), ' ');
-    transform(text_1250.begin(), text_1250.end(),
+    transform(text_1250.begin(), text_1250.end(), // <algoritmh>
               vysledek.begin(), znak_Cp1250_do_Cp852);
     return vysledek;
 }
 
+
+double logaritmus(double x)
+{
+    double y;
+    y = log(x);
+
+    switch (errno) {
+    case 0:
+        perror(NULL);
+        printf("log(%f) = %f.\n", x, y);
+        return y;
+    default:
+        perror("Hlaseni");
+        return 0;
+    }
+}
+
+void test_vystup() {
+    printf("Cislo 10000/3 = %f\n", 10000.0/3);
+    (void) logaritmus(-5);
+    (void) logaritmus(0);
+}
+
+void printf_locale_vystup() {
+    printf("* Aktualne nastavene locale LC_ALL: %s\n", setlocale(LC_ALL, NULL));
+    test_vystup();
+
+    printf("* Locale LC_ALL nastaveno na: %s\n", setlocale(LC_ALL,""));
+    test_vystup();
+
+    printf("* Locale LC_NUMERIC nastaveno na %s\n", setlocale(LC_NUMERIC,"C"));
+    test_vystup();
+}
 #endif // CESTINA_H_INCLUDED

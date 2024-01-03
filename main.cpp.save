@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "cestina.h"
+#include <stdlib.h>
 
 #include "zajimavosti.h"
 #include "tricks.h"
@@ -24,6 +25,7 @@
 #include "19_vstupy_a_vystupy.h"
 #include "19_vstupy_a_vystupy_print.h"
 #include "20_priklad.h"
+#include "20_priklad_wide.h"
 #include "20_komparatory.h"
 
 using namespace std;
@@ -58,30 +60,36 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP17
 //#define KAP18
 //#define KAP19
-// #define KAP20
-#define KAP20_2
+#define KAP20
 
-
-int main(int argc, char *argv[], char* env[])
-// int main()
+#ifdef USE_WIDE_ENTRY_POINT_MAIN
+int wmain( int argc, wchar_t *argv[]) // need -municode
 {
-#ifdef KAP20_2
-    // Tabs::reset();
-    // Tabs::printFunctionHeader("Kapitola 20_2: Pøíklad");
-    // cout << endl;
-
-    // zarid_cestinu(); // rozbije možnost pøesmìrovat vstup
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
 
     // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
     // nejsou pargametry programu. Tyto pøíkazy zpracuje
     // operaèní systém pøed spuštìním programu.
-    
+
+    wvolba wzjistena_volba(argc, argv);
+    wtridic wradic;
+    wradic.wzpracuj(wzjistena_volba.wzvoleno());
+#else
+int main(int argc, char *argv[], char* env[])
+{
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
+
+    // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
+    // nejsou pargametry programu. Tyto pøíkazy zpracuje
+    // operaèní systém pøed spuštìním programu.
+
     volba zjistena_volba(argc, argv);
     tridic radic;
     radic.zpracuj(zjistena_volba.zvoleno());
 
-
-#endif // KAP20_2
+#endif
 
 #ifdef KAP20 // oèekává vstup ze souboru
     Tabs::reset();

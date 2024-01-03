@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include "cestina.h"
+#include <stdlib.h>
 
 #include "zajimavosti.h"
 #include "tricks.h"
@@ -24,6 +25,7 @@
 #include "19_vstupy_a_vystupy.h"
 #include "19_vstupy_a_vystupy_print.h"
 #include "20_priklad.h"
+#include "20_priklad_wide.h"
 #include "20_komparatory.h"
 
 using namespace std;
@@ -58,45 +60,45 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP17
 //#define KAP18
 //#define KAP19
-// #define KAP20
-#define KAP20_2
+//#define KAP20
 
-
-int main(int argc, char *argv[], char* env[])
-// int main()
+#ifdef USE_WIDE_ENTRY_POINT_MAIN
+int wmain( int argc, wchar_t *argv[]) // need -municode
 {
-#ifdef KAP20_2
-    // Tabs::reset();
-    // Tabs::printFunctionHeader("Kapitola 20_2: Pøíklad");
-    // cout << endl;
+    #ifdef KAP20
+        Tabs::reset();
+        Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
 
-    // zarid_cestinu(); // rozbije možnost pøesmìrovat vstup
+        // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
+        // nejsou pargametry programu. Tyto pøíkazy zpracuje
+        // operaèní systém pøed spuštìním programu.
 
-    // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
-    // nejsou pargametry programu. Tyto pøíkazy zpracuje
-    // operaèní systém pøed spuštìním programu.
+        wvolba wzjistena_volba(argc, argv);
+        wtridic wradic;
+        wradic.wzpracuj(wzjistena_volba.wzvoleno());
+    #endif // KAP20
+#else
+int main(int argc, char *argv[], char* env[])
+{
+    #ifdef KAP20
+        Tabs::reset();
+        Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
 
-    volba zjistena_volba(argc, argv);
-    tridic radic;
-    radic.zpracuj(zjistena_volba.zvoleno());
+        // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
+        // nejsou pargametry programu. Tyto pøíkazy zpracuje
+        // operaèní systém pøed spuštìním programu.
 
-
-#endif // KAP20_2
-
-#ifdef KAP20 // oèekává vstup ze souboru
-    Tabs::reset();
-    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
-    cout << endl;
-    // Aby fungovalo pøesmìrování proudu,
-    // nesmí být nic pøed vstupem voláno.
-    // tridic().zpracuj();
+        volba zjistena_volba(argc, argv);
+        tridic radic;
+        radic.zpracuj(zjistena_volba.zvoleno());
+    #endif // KAP20
 #endif
 
     // pokud program zpracovává pøíkazovou øádku,
     // nebo pøesmìrovává stream, je nutné
     // aby byly tyto funkce až po tìchto funkcích, jinak to nefunguje
 
-    char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
+    // char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
 
 
 #ifdef TRICKS

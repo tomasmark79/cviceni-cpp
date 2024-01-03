@@ -7,14 +7,20 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <map>
+#include <math.h>
 
 #include "20_komparatory.h"
 
 using namespace std;
 
+void nastav_rastr_cascadia();
 void nastav_konzolu_pro_cp1250();
 void obnov_puvodni_nastaveni_konzoly();
 string retezec_Cp1250_na_string_Cp852(const char *text_napovedy_1250);
+
+void printf_locale_vystup();
+
 
 // Declaration of Class volba
 class volba
@@ -22,13 +28,14 @@ class volba
 public:
     using u_komparator = bool(*)(string, string); // UKAZATEL na funci
     volba(int argc, char** argv);
+
     [[noreturn]] void napoveda();
     u_komparator zvoleno(); // get zvoleno
-
 private:
+    static map<string, u_komparator> tabulka_voleb;
     u_komparator komparator;
-    static string text_napovedy;
-    static wstring text_napovedy_wide;
+    static string text_napovedy_v_852;
+    static string text_napovedy_cz;
 };
 
 // Declaration of Class tridic
@@ -36,11 +43,14 @@ class tridic
 {
     vector<string> soubor;
     string radka;
+
     void nacti();
     void serad(volba::u_komparator komparator);
     void vypis();
 public:
     void zpracuj(volba::u_komparator komparator);
 };
+
+
 
 #endif // PRIKLAD_2_H_INCLUDED
