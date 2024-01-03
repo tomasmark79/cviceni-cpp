@@ -1,12 +1,16 @@
 #include <Windows.h>
 #include "20_priklad_wide.h"
 #include <fcntl.h>
+//
+//
+// tento soubor je UTF-8
+//
 
 using namespace std;
 
 // toto je použitelné pouze pro kódování zdrojového souboru v UTF-8
 wstring wvolba::text_napovedy_wide = LR"(
-SORT - program pro seřazení řádek daného souboru. Použití:
+utf8 SORT - program pro seřazení řádek daného souboru. Použití:
 sort volba < vstupní-soubor > výstupní-soubor
 Možné volby:
 -n nebo /n řazení podle čísel na počátcích řádek
@@ -26,33 +30,32 @@ wstring wvolba::text_napovedy_uk = LR"(
 [[noreturn]]
 void wvolba::wnapoveda()
 {
-    // nastav_konzolu_pro_cp1250();
     // přidáno cestou - není z učebnice
     // SetConsoleOutputCP(CP_UTF8); // nasatví na výstupu utf8
-    // UK pro UTF-8
-    setlocale(LC_ALL, "Russian");
-    SetConsoleOutputCP(866);
-    wcerr << text_napovedy_uk;
 
-    // CZ pro UTF-8
+    // VARIANTA 1
     setlocale(LC_ALL, "Czech");
     SetConsoleOutputCP(1250);
     wcerr << text_napovedy_wide;
+    wcerr << text_napovedy_wide.length() << endl;
 
-    // wcerr.imbue(std::locale(""));
-    // nastav_rastr_cascadia();
-    // wcerr << text_napovedy_uk << endl;
-    // wcerr << text_napovedy_wide << endl;
-    // printf_locale_vystup();
-    // toto nastaví‚ nastaví výchozí hodnotu
-    /*
-            wcerr.imbue(std::locale(""));
-            wcerr.imbue(std::locale("C"));
-            wcerr.imbue(std::locale("POSIX"));
-            */
-    // wcerr << text_napovedy_wide << endl;
+    // VARIANTA 2
+    setlocale(LC_ALL, "Russian");
+    SetConsoleOutputCP(866);
 
-    // obnov_puvodni_nastaveni_konzoly();
+    wcerr << text_napovedy_uk;
+    // strlen
+    wcerr << text_napovedy_uk.length() << endl;
+    // strlen přes metodu string c_
+    wcerr << wcslen(text_napovedy_uk.c_str()) << endl;
+
+    // zde pozor, nefunguje dle očekávání
+    cout << "На берегу пустынных волн: strlen= " << strlen("На берегу пустынных волн") << endl; // return 45
+    cout << "На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25
+
+    wcout << L"На берегу пустынных волн: strlen= " << strlen("На берегу пустынных волн") << endl; // return 45
+    wcout << L"На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25
+
     exit(1);
 }
 

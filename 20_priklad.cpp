@@ -6,17 +6,6 @@ using namespace std;
 
 // Members of Class volba
 
-// surovı øetìzecovı literál v ANSI
-string volba::text_napovedy_cz = R"(
-CP1250
-SORT - program pro seøazení øádek daného souboru. Pouití:
-sort volba < vstupní-soubor > vıstupní-soubor
-Moné volby:
--n nebo /n øazení podle èísel na poèátcích øádek
--l nebo /l lexikografické øazení
--a nebo /a abecední øazení
-)";
-
 // øetìzec pøeveden funkcí
 string volba::text_napovedy_v_852 = retezec_Cp1250_na_string_Cp852(R"(
 CP852
@@ -28,6 +17,17 @@ Moné volby:
 -a nebo /a abecední øazení
 )");
 
+// surovı øetìzecovı literál v ANSI
+string volba::text_napovedy_cz = R"(
+CP1250
+SORT - program pro seøazení øádek daného souboru. Pouití:
+sort volba < vstupní-soubor > vıstupní-soubor
+Moné volby:
+-n nebo /n øazení podle èísel na poèátcích øádek
+-l nebo /l lexikografické øazení
+-a nebo /a abecední øazení
+)";
+
 [[noreturn]]
 void volba::napoveda()
 {
@@ -35,39 +35,20 @@ void volba::napoveda()
     // pøidáno cestou - není z uèebnice
     // SetConsoleOutputCP(CP_UTF8); // nasatví na vıstupu utf8
 
-    // CZ pro ANSI
-    nastav_konzolu_pro_cp1250(); // èeské prostøedí
-    cerr << text_napovedy_cz << endl;
-    obnov_puvodni_nastaveni_konzoly();
+    // ANSI Varianty
 
-    // CZ pro ANSI
+    // VARIANTA 1
+    // program pøevede øetìzec 1250 na 852 (jde jen u kompatibilních znakù)
     cerr << text_napovedy_v_852 << endl;
 
-//    // UK pro UTF-8
-//    setlocale(LC_ALL, "Russian");
-//    SetConsoleOutputCP(866);
-//    wcerr << text_napovedy_uk;
-//
-//    // CZ pro UTF-8
-//    setlocale(LC_ALL, "Czech");
-//    SetConsoleOutputCP(1250);
-//    wcerr << text_napovedy_wide;
+    // VARIANTA 2
+    // Nauèí konzolové okno pouívat kódovou stránku 1250.
+    nastav_konzolu_pro_cp1250();
+    cerr << text_napovedy_cz << endl;
 
+    // Obnoví konzolové okno do pùovdního stavu
+    obnov_puvodni_nastaveni_konzoly();
 
-    // wcerr.imbue(std::locale(""));
-    // nastav_rastr_cascadia();
-    // wcerr << text_napovedy_uk << endl;
-    // wcerr << text_napovedy_wide << endl;
-    // printf_locale_vystup();
-    // toto nastaví‚ nastaví vıchozí hodnotu
-    /*
-            wcerr.imbue(std::locale(""));
-            wcerr.imbue(std::locale("C"));
-            wcerr.imbue(std::locale("POSIX"));
-            */
-    // wcerr << text_napovedy_wide << endl;
-
-    // obnov_puvodni_nastaveni_konzoly();
     exit(1);
 }
 
@@ -79,7 +60,7 @@ map<string, volba::u_komparator> volba::tabulka_voleb
     {"-a", alfabeticky}
 };
 
-// novÄ‚Ë zpÄ¹Å»sob s asociativnÄ‚Â­m kontejnerem
+// konstruktor vytvoøí ukazatel na funkci dle asociativního kontejneru tabulky voleb
 volba::volba(int argc, char **argv)
 {
     try
@@ -105,18 +86,13 @@ volba::u_komparator volba::zvoleno()
     return komparator;
 }
 
-
-
 // Members of Class tridic
 void tridic::zpracuj(volba::u_komparator komparator)
 {
     nacti();
     serad(komparator);
     vypis();
-
 }
-
-
 
 void tridic::nacti()
 {
@@ -125,7 +101,6 @@ void tridic::nacti()
         soubor.push_back(radka);
     }
 }
-
 
 void tridic::serad(volba::u_komparator komparator)
 {
@@ -139,4 +114,3 @@ void tridic::vypis()
         cout << lajna << endl;
     }
 }
-

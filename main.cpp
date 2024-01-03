@@ -43,6 +43,10 @@ using namespace std;
 // Tato definice mùže obsahovat inicializaci.
 int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 
+    // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
+    // nejsou pargametry programu. Tyto pøíkazy zpracuje
+    // operaèní systém pøed spuštìním programu.
+
 //#define TRICKS
 
 //#define KAP3
@@ -60,45 +64,44 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP17
 //#define KAP18
 //#define KAP19
-//#define KAP20
+
+#define SHOW_WORKING_FILE_PATH
+#define KAP20 // sort
+
+
 
 #ifdef USE_WIDE_ENTRY_POINT_MAIN
 int wmain( int argc, wchar_t *argv[]) // need -municode
-{
-    #ifdef KAP20
-        Tabs::reset();
-        Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
-
-        // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
-        // nejsou pargametry programu. Tyto pøíkazy zpracuje
-        // operaèní systém pøed spuštìním programu.
-
-        wvolba wzjistena_volba(argc, argv);
-        wtridic wradic;
-        wradic.wzpracuj(wzjistena_volba.wzvoleno());
-    #endif // KAP20
 #else
 int main(int argc, char *argv[], char* env[])
+#endif // USE_WIDE_ENTRY_POINT_MAIN
+
 {
-    #ifdef KAP20
-        Tabs::reset();
-        Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
 
-        // Zdùraznìme, že pøíkazy pro pøesmìrování vstupu a výstupu
-        // nejsou pargametry programu. Tyto pøíkazy zpracuje
-        // operaèní systém pøed spuštìním programu.
+#ifdef SHOW_WORKING_FILE_PATH
+    char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
+#endif // SHOW_WORKING_FILE_PATH
 
-        volba zjistena_volba(argc, argv);
-        tridic radic;
-        radic.zpracuj(zjistena_volba.zvoleno());
-    #endif // KAP20
+#if defined KAP20 && defined USE_WIDE_ENTRY_POINT_MAIN
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
+
+    wvolba wzjistena_volba(argc, argv);
+    wtridic wradic;
+    wradic.wzpracuj(wzjistena_volba.wzvoleno());
 #endif
 
-    // pokud program zpracovává pøíkazovou øádku,
-    // nebo pøesmìrovává stream, je nutné
-    // aby byly tyto funkce až po tìchto funkcích, jinak to nefunguje
 
-    // char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
+#if defined KAP20 && !defined USE_WIDE_ENTRY_POINT_MAIN
+    Tabs::reset();
+    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
+
+
+    volba zjistena_volba(argc, argv);
+    tridic radic;
+    radic.zpracuj(zjistena_volba.zvoleno());
+#endif
+
 
 
 #ifdef TRICKS
