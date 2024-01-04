@@ -49,8 +49,8 @@ void wvolba::wnapoveda()
     wcerr << wcslen(text_napovedy_uk.c_str()) << endl;
 
     // zde pozor, nefunguje dle očekávání
-    cout << "На берегу пустынных волн: strlen= " << strlen("На берегу пустынных волн") << endl; // return 45
-    cout << "На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25
+    cout << u8"На берегу пустынных волн: strlen= " << strlen(u8"На берегу пустынных волн") << endl; // return 45
+    cout << u8"На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25
 
     wcout << L"На берегу пустынных волн: strlen= " << strlen("На берегу пустынных волн") << endl; // return 45
     wcout << L"На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25

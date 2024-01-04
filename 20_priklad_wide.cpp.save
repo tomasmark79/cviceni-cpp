@@ -26,7 +26,6 @@ wstring wvolba::text_napovedy_uk = LR"(
 Включаем буферизацию, чтобы VS не прерывал последовательности байтов
 )";
 
-
 [[noreturn]]
 void wvolba::wnapoveda()
 {
@@ -46,12 +45,12 @@ void wvolba::wnapoveda()
     wcerr << text_napovedy_uk;
     // strlen
     wcerr << text_napovedy_uk.length() << endl;
-    // strlen přes metodu string c_
+    // strlen přes metodu string c_str()
     wcerr << wcslen(text_napovedy_uk.c_str()) << endl;
 
     // zde pozor, nefunguje dle očekávání
-    cout << "На берегу пустынных волн: strlen= " << strlen("На берегу пустынных волн") << endl; // return 45
-    cout << "На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25
+    cout << u8"На берегу пустынных волн: strlen= " << strlen(u8"На берегу пустынных волн") << endl; // return 45
+    cout << u8"На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25
 
     wcout << L"На берегу пустынных волн: strlen= " << strlen("На берегу пустынных волн") << endl; // return 45
     wcout << L"На берегу пустынных волн: wcslen= " << wcslen(L"На берегу пустынных волн") << endl; // return 25

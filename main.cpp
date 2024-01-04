@@ -1,7 +1,7 @@
 #include <stdlib.h>
+#include <Windows.h>
 #include <iostream>
 #include "cestina.h"
-#include <stdlib.h>
 
 #include "zajimavosti.h"
 #include "tricks.h"
@@ -66,6 +66,7 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP19
 
 #define SHOW_WORKING_FILE_PATH
+#define SHOW_USER_LOCALE
 #define KAP20 // sort
 
 
@@ -82,10 +83,59 @@ int main(int argc, char *argv[], char* env[])
     char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
 #endif // SHOW_WORKING_FILE_PATH
 
-#if defined KAP20 && defined USE_WIDE_ENTRY_POINT_MAIN
-    Tabs::reset();
-    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
+#ifdef SHOW_USER_LOCALE
+    // https://en.cppreference.com/w/cpp/locale/locale
+    std::wcout << "User-preferred locale setting is "
+               << std::locale("").name().c_str() << '\n';
+    // on startup, the global locale is the "C" locale
+    std::wcout << 1000.01 << '\n';
 
+    // replace the C++ global locale and the "C" locale with the user-preferred locale
+    std::locale::global(std::locale(""));
+
+    // use the new global locale for future wide character output
+    std::wcout.imbue(std::locale());
+
+    // output the same number again
+    std::wcout << 1000.01 << '\n';
+
+    // jen pokus
+    try
+    {
+        // Získání výchozího jazyka systému
+        LANGID systemLangID = GetSystemDefaultUILanguage();
+        std::cout << "Výchozí jazyk systému: " << systemLangID << std::endl;
+
+        // Získání jazyka uživatele
+        LANGID userLangID = GetUserDefaultUILanguage();
+        std::cout << "Jazyk uživatele: " << userLangID << std::endl;
+
+        // Získání názvu lokálního nastavení
+        wchar_t* localeName = new wchar_t[LOCALE_NAME_MAX_LENGTH];
+
+        if (GetLocaleInfoEx(LOCALE_NAME_USER_DEFAULT, LOCALE_SNAME, localeName, LOCALE_NAME_MAX_LENGTH) == 0) {
+            delete[] localeName;
+            throw std::runtime_error("Chyba pøi získávání názvu lokálního nastavení.");
+        }
+
+        size_t len = wcslen(localeName) + 1;
+        char* localeNameChar = new char[len];
+        wcstombs(localeNameChar, localeName, len);
+        // Zde mùžete pøevést LANGID na odpovídající název lokalizace a použít jej v kódu
+        // pod windows nejde použít nic - jen "", "C", "POSIX"
+        // std::locale::global(std::locale(localeNameChar));
+
+        delete[] localeName;
+    }
+    catch (const std::exception& e)
+    {
+        std::cerr << "Chyba: " << e.what() << std::endl;
+    }
+
+#endif // SHOW_WORKING_FILE_PATH
+
+
+#if defined KAP20 && defined USE_WIDE_ENTRY_POINT_MAIN
     wvolba wzjistena_volba(argc, argv);
     wtridic wradic;
     wradic.wzpracuj(wzjistena_volba.wzvoleno());
@@ -93,10 +143,6 @@ int main(int argc, char *argv[], char* env[])
 
 
 #if defined KAP20 && !defined USE_WIDE_ENTRY_POINT_MAIN
-    Tabs::reset();
-    Tabs::printFunctionHeader("Kapitola 20: Pøíklad");
-
-
     volba zjistena_volba(argc, argv);
     tridic radic;
     radic.zpracuj(zjistena_volba.zvoleno());

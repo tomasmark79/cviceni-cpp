@@ -1,14 +1,26 @@
 #include "20_komparatory.h"
 
-// locale objekt;
-locale lok;
+using namespace std;
 
+// locale lok("Czech_Czech Republic.1250"); // nelze s G++ compilatorem
+// Jestlie k pøekladu poslední verze našeho programu pouijete pøekladaè g++
+// a spustíte program s volbou pro abecední øazení, skonèí vıjimkou, nebo – jak víme
+// – tento pøekladaè pod Windows podporuje pouze lokální nastavení "C".
+// To znamená, e si musíme napsat odpovídající nástroje samy :-).
+
+std::locale lok(""); // toto je však OK
 
 bool alfabeticky(string lajna1, string lajna2)
 {
-    setlocale(LC_ALL, "Czech");
+    // toto zajistí èeské prostøedí
+    // !!! jene pro celı program a né jen pro funkci tøízení abecednì podle Czech
+    // co je problém!
+    setlocale(LC_CTYPE, "Czech"); // èeské znaky
+    setlocale(LC_COLLATE, "Czech"); // èeské skládání
+
     return lok(lajna1, lajna2);
 }
+
 
 bool lexikograficky(string lajna1, string lajna2)
 {
@@ -17,13 +29,12 @@ bool lexikograficky(string lajna1, string lajna2)
 
 bool podle_cisel(string lajna1, string lajna2)
 {
-    istringstream vstup1(lajna1), vstup2(lajna2); // #include <sstream>
+    istringstream vstup1(lajna1), vstup2(lajna2)/*, vstup3(lajna2)*/; // #include <sstream>
     int n1, n2;
     vstup1 >> n1;
     vstup2 >> n2;
     return n1 < n2;
 }
-
 
 bool walfabeticky(wstring lajna1, wstring lajna2)
 {
