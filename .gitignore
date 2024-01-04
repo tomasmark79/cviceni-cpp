@@ -1,6 +1,8 @@
 bin/
 obj/
+.cache/
 *.cbp
 *.depend
 *.layout
 *.json
+*.save
