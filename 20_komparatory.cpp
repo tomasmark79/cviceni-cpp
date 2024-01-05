@@ -1,4 +1,6 @@
 #include "20_komparatory.h"
+#include <unordered_map>
+#include <sstream>
 
 using namespace std;
 
@@ -9,6 +11,137 @@ using namespace std;
 // To znamená, e si musíme napsat odpovídající nástroje samy :-).
 
 std::locale lok(""); // toto je však OK
+
+map <char, char> slozena_pismena
+{
+    {'C', 'H'},
+};
+
+unordered_map<char, char> mala_na_velka
+{
+    { 'á', 'Á' },
+    { 'ä', 'Ä' },
+    { 'è', 'È' },
+    { 'ï', 'Ï' },
+    { 'é', 'É' },
+    { 'ì', 'Ì' },
+    { 'í', 'Í' },
+    { 'å', 'Å' },
+    { '¾', '¼' },
+    { 'ò', 'Ò' },
+    { 'ó', 'Ó' },
+    { 'ô', 'Ô' },
+    { 'à', 'À' },
+    { 'ø', 'Ø' },
+    { 'š', 'Š' },
+    { '', '' },
+    { 'ú', 'Ú' },
+    { 'ù', 'Ù' },
+    { 'ı', 'İ' },
+    { '', '' },
+};
+static unordered_map< string, pair<string, char>> uprava
+{
+    { "A",{ "Aa", 'a' } },
+    { "Á",{ "Aa", 'b' } },
+    { "Ä",{ "Aa", 'e' } },
+    { "B",{ "Ba", 'a' } },
+    { "C",{ "Ca", 'a' } },
+    { "È",{ "Cb", 'a' } },
+    { "D",{ "Da", 'a' } },
+    { "Ï",{ "Da", 'b' } },
+    { "E",{ "Ea", 'a' } },
+    { "É",{ "Ea", 'b' } },
+    { "Ì",{ "Ea", 'c' } },
+    { "F",{ "Fa", 'a' } },
+    { "G",{ "Ga", 'a' } },
+    { "H",{ "Ha", 'a' } },
+    { "CH",{ "Hb", 'a' } },
+    { "I",{ "Ia", 'a' } },
+    { "Í",{ "Ia", 'b' } },
+    { "J",{ "Ja", 'a' } },
+    { "K",{ "Ka", 'a' } },
+    { "L",{ "La", 'a' } },
+    { "Å",{ "La", 'b' } },
+    { "¼",{ "La", 'c' } },
+    { "M",{ "Ma", 'a' } },
+    { "N",{ "Na", 'a' } },
+    { "Ò",{ "Na", 'b' } },
+    { "O",{ "Oa", 'a' } },
+    { "Ó",{ "Oa", 'b' } },
+    { "Ô",{ "Oa", 'f' } },
+    { "P",{ "Pa", 'a' } },
+    { "Q",{ "Qa", 'a' } },
+    { "R",{ "Ra", 'a' } },
+    { "À",{ "Ra", 'b' } },
+    { "Ø",{ "Rb", 'a' } },
+    { "S",{ "Sa", 'a' } },
+    { "Š",{ "Sb", 'a' } },
+    { "T",{ "Ta", 'a' } },
+    { "",{ "Ta", 'b' } },
+    { "U",{ "Ua", 'a' } },
+    { "Ú",{ "Ua", 'b' } },
+    { "Ù",{ "Ua", 'd' } },
+    { "V",{ "Va", 'a' } },
+    { "W",{ "Wa", 'a' } },
+    { "X",{ "Xa", 'a' } },
+    { "Y",{ "Ya", 'a' } },
+    { "İ",{ "Ya", 'b' } },
+    { "Z",{ "Za", 'a' } },
+    { "",{ "Zb", 'a' } },
+    { " ",{ " ", ' ' } },
+};
+
+char velke(char znak)
+{
+    if ((znak >= 'a') && (znak <= 'z'))
+    {
+        return znak - 'a' + 'A';
+    }
+    if (mala_na_velka.find(znak) != mala_na_velka.end())
+    {
+        return mala_na_velka[znak];
+    }
+    return znak;
+}
+
+string velke(string text)
+{
+    string vysledek;
+    for (char p : text)
+    {
+        vysledek += velke(p);
+    }
+    return vysledek;
+}
+
+
+string zastup(string text)
+{
+    string primarni, sekundarni, pismeno;
+    string TEXT = velke(text);
+    for (unsigned i = 0; i < TEXT.length(); i++)
+    {
+        pismeno.clear();
+        pismeno += TEXT[i];
+        if ((TEXT[i] == 'C') && (i + 1 < TEXT.length())
+                && (TEXT[i + 1] == 'H'))
+        {
+            pismeno += 'H';
+            i++;
+        }
+        primarni += uprava[pismeno].first;
+        sekundarni += uprava[pismeno].second;
+    }
+    return primarni + ' ' + sekundarni;
+}
+
+
+bool abecedne(string lajna1, string lajna2) // Opakujeme se
+{
+    setlocale(LC_CTYPE, "Czech");
+    return zastup(lajna1) < zastup(lajna2);
+}
 
 bool alfabeticky(string lajna1, string lajna2)
 {
@@ -33,6 +166,15 @@ bool podle_cisel(string lajna1, string lajna2)
     int n1, n2;
     vstup1 >> n1;
     vstup2 >> n2;
+    cout << "1: " << "\t" << n1 << " ";
+    cout << "2: " << "\t" << " " << n2 << " ";
+    if (n1 < n2)
+        cout << "vstup1 < vstup2" << "   -   ";
+    else if (n1 > n2)
+        cout << "vstup1 > vstup2" << "   -   ";
+    else if (n1 == n2)
+        cout << "vstup1 = vstup2" << "   -   ";
+    cout << "return: " << (n1 < n2) << endl;
     return n1 < n2;
 }
 
@@ -53,5 +195,5 @@ bool wpodle_cisel(wstring lajna1, wstring lajna2)
     int n1, n2;
     vstup1 >> n1;
     vstup2 >> n2;
-    return n1 < n2;
+    return (n1 < n2);
 }

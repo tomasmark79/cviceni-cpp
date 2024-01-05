@@ -4,26 +4,26 @@
 #include "cestina.h"
 
 #include "zajimavosti.h"
-#include "tricks.h"
+// #include "tricks.h"
 
-#include "03_slozitejsi_programy.h"
-#include "04_pokrocilejsi_konstrukce_a_techniky.h"
-#include "06_zakladni_datove_typy.h"
-#include "07_prikazy.h"
-#include "09_prace_s_pameti.h"
-#include "09_strom.h"
-#include "10_vyctove_typy_struktury_a_unie.h"
-#include "11_vyrazy.h"
-#include "12_deklarace_a_promenne.h"
-#include "13_funkce.h"
-#include "14_program_a_jeho_beh.h"
-#include "15_preprocesor.h"
-#include "16_objektove_typy.h"
-#include "17_dedeni.h"
-#include "17_zakladni_a_barevne_graficke_objekty.h"
-#include "18_chyby_za_behu_programu.h"
-#include "19_vstupy_a_vystupy.h"
-#include "19_vstupy_a_vystupy_print.h"
+//#include "03_slozitejsi_programy.h"
+//#include "04_pokrocilejsi_konstrukce_a_techniky.h"
+//#include "06_zakladni_datove_typy.h"
+//#include "07_prikazy.h"
+//#include "09_prace_s_pameti.h"
+//#include "09_strom.h"
+//#include "10_vyctove_typy_struktury_a_unie.h"
+//#include "11_vyrazy.h"
+//#include "12_deklarace_a_promenne.h"
+//#include "13_funkce.h"
+//#include "14_program_a_jeho_beh.h"
+//#include "15_preprocesor.h"
+//#include "16_objektove_typy.h"
+//#include "17_dedeni.h"
+//#include "17_zakladni_a_barevne_graficke_objekty.h"
+//#include "18_chyby_za_behu_programu.h"
+//#include "19_vstupy_a_vystupy.h"
+//#include "19_vstupy_a_vystupy_print.h"
 #include "20_priklad.h"
 #include "20_priklad_wide.h"
 #include "20_komparatory.h"
@@ -65,8 +65,8 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP18
 //#define KAP19
 
-#define SHOW_WORKING_FILE_PATH
-#define SHOW_USER_LOCALE
+// #define SHOW_WORKING_FILE_PATH
+//#define SHOW_USER_LOCALE
 #define KAP20 // sort
 
 

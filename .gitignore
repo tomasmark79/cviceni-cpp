@@ -6,3 +6,4 @@ obj/
 *.layout
 *.json
 *.save
+*.cscope_file_list

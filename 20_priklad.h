@@ -1,16 +1,16 @@
 #ifndef PRIKLAD_2_H_INCLUDED
 #define PRIKLAD_2_H_INCLUDED
 
+//#include <Windows.h>
 #include <iostream>
 #include <algorithm>
 #include <vector>
 #include <string>
-#include <fstream>
-#include <sstream>
+//#include <fstream>
+//#include <sstream>
 #include <map>
-#include <math.h>
-
-#include "20_komparatory.h"
+//#include <unordered_map>
+//#include <math.h>
 
 using namespace std;
 
