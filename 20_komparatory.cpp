@@ -124,10 +124,14 @@ string zastup(string text)
     {
         pismeno.clear();
         pismeno += TEXT[i];
-        if ((TEXT[i] == 'C') && (i + 1 < TEXT.length())
-                && (TEXT[i + 1] == 'H'))
+        if (
+            (slozena_pismena.find(TEXT[i]) != slozena_pismena.end()) &&
+            (i + 1 < TEXT.length()) &&
+            (TEXT[i+1] == slozena_pismena[TEXT[i]])
+           )
         {
-            pismeno += 'H';
+            // jedná se o písmeno CH
+            pismeno += slozena_pismena[TEXT[i]];
             i++;
         }
         primarni += uprava[pismeno].first;
