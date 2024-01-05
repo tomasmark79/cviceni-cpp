@@ -67,8 +67,8 @@ map<string, volba::u_komparator> volba::tabulka_voleb
 // konstruktor vytvoøí ukazatel na funkci dle asociativního kontejneru tabulky voleb
 volba::volba(int argc, char **argv)
 {
-    argc=2;
-    argv[1] = "-no";
+    // argc=2;
+    // argv[1] = "-n";
     try
     {
         if (argc != 2)
@@ -107,7 +107,9 @@ void tridic::nacti()
     // ètení ze souboru napevno
     // vhodné pro ladìní
     // string jmeno = "abcd-ansi.txt";
-    string jmeno = "vstup";
+    string jmeno = "abcd-ansi - kopie.txt";
+    // string jmeno = "vstup";
+    // string jmeno = "vstup - kopie";
 
     ifstream vstup(jmeno);
     if (!vstup)
@@ -134,11 +136,13 @@ void tridic::serad(volba::u_komparator komparator)
     } catch (exception &e)
     {
         cout << e.what() << endl;
+        exit(1);
     }
 }
 
 void tridic::vypis()
 {
+    cout << "---------" << endl << __FUNCTION__ << endl << "---------" << endl;
     for (auto lajna : soubor)
     {
         cout << lajna << endl;

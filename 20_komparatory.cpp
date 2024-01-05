@@ -166,20 +166,13 @@ bool lexikograficky(string lajna1, string lajna2)
 
 bool podle_cisel(string lajna1, string lajna2)
 {
-    istringstream vstup1(lajna1), vstup2(lajna2)/*, vstup3(lajna2)*/; // #include <sstream>
+    istringstream vstup1(lajna1), vstup2(lajna2); // #include <sstream>
     int n1, n2;
-    vstup1 >> n1;
-    vstup2 >> n2;
-    cout << "1: " << "\t" << n1 << " ";
-    cout << "2: " << "\t" << " " << n2 << " ";
-    if (n1 < n2)
-        cout << "vstup1 < vstup2" << "   -   ";
-    else if (n1 > n2)
-        cout << "vstup1 > vstup2" << "   -   ";
-    else if (n1 == n2)
-        cout << "vstup1 = vstup2" << "   -   ";
-    cout << "return: " << (n1 < n2) << endl;
-    return n1 < n2;
+    if ((vstup1 >> n1) && (vstup2 >> n2)) {
+        return n1 < n2;
+    }
+    // Ošetøení pøípadu, kdy nelze naèíst èísla
+    return lajna1 < lajna2;
 }
 
 bool walfabeticky(wstring lajna1, wstring lajna2)
@@ -197,7 +190,9 @@ bool wpodle_cisel(wstring lajna1, wstring lajna2)
 {
     wistringstream vstup1(lajna1), vstup2(lajna2); // #include <sstream>
     int n1, n2;
-    vstup1 >> n1;
-    vstup2 >> n2;
-    return (n1 < n2);
+    if ((vstup1 >> n1) && (vstup2 >> n2)) {
+        return n1 < n2;
+    }
+    // Ošetøení pøípadu, kdy nelze naèíst èísla
+    return lajna1 < lajna2;
 }

@@ -14,6 +14,7 @@ bool walfabeticky(wstring lajna1, wstring lajna2);
 bool wlexikograficky(wstring lajna1, wstring lajna2);
 bool wpodle_cisel(wstring lajna1, wstring lajna2);
 
+
 template<volba::u_komparator f>
 bool negace(string lajna1, string lajna2)
 {
