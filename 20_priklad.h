@@ -14,6 +14,8 @@
 
 using namespace std;
 
+// test
+
 void nastav_rastr_cascadia();
 void nastav_konzolu_pro_cp1250();
 void obnov_puvodni_nastaveni_konzoly();
