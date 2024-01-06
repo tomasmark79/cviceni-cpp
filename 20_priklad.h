@@ -18,9 +18,8 @@ void nastav_rastr_cascadia();
 void nastav_konzolu_pro_cp1250();
 void obnov_puvodni_nastaveni_konzoly();
 string retezec_Cp1250_na_string_Cp852(const char *text_napovedy_1250);
-
+string string_Cp1250_na_string_Cp852( string text_1250 );
 void printf_locale_vystup();
-
 
 // Declaration of Class volba
 class volba
@@ -31,11 +30,16 @@ public:
 
     [[noreturn]] void napoveda();
     u_komparator zvoleno(); // get zvoleno
+    void nacti_napovedu();
+
 private:
     static map<string, u_komparator> tabulka_voleb;
     u_komparator komparator;
+    static string zalozni_text_napovedy;
+    ;
     static string text_napovedy_v_852;
     static string text_napovedy_cz;
+    string text_napovedy;
 };
 
 // Declaration of Class tridic

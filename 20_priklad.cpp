@@ -1,9 +1,23 @@
 #include "20_priklad.h"
 #include "20_komparatory.h"
+#include "20_inicializace.h"
 #include <fstream>
+
 using namespace std;
 
 // Members of Class volba
+
+//
+string volba::zalozni_text_napovedy = retezec_Cp1250_na_string_Cp852(R"(
+CP852
+SORT - program pro seøazení øádek daného souboru. Použití:
+sort volba < vstupní-soubor > výstupní-soubor
+Možné volby:
+-n nebo /n øazení podle èísel na poèátcích øádek
+-l nebo /l lexikografické øazení
+-a nebo /a abecední øazení
+)");
+
 
 // øetìzec pøeveden funkcí
 string volba::text_napovedy_v_852 = retezec_Cp1250_na_string_Cp852(R"(
@@ -38,12 +52,13 @@ void volba::napoveda()
 
     // VARIANTA 1
     // program pøevede øetìzec 1250 na 852 (jde jen u kompatibilních znakù)
-    cerr << text_napovedy_v_852 << endl;
+    cerr << text_napovedy << endl;
+    //cerr << text_napovedy_v_852 << endl;
 
     // VARIANTA 2
     // Nauèí konzolové okno používat kódovou stránku 1250.
     nastav_konzolu_pro_cp1250();
-    cerr << text_napovedy_cz << endl;
+    //cerr << text_napovedy_cz << endl;
 
     // Obnoví konzolové okno do pùovdního stavu
     obnov_puvodni_nastaveni_konzoly();
@@ -64,6 +79,21 @@ map<string, volba::u_komparator> volba::tabulka_voleb
     {"-Ao", negace<abecedne>},
 };
 
+
+void volba::nacti_napovedu()
+{
+    try
+    {
+        string text_pom;
+        inicializator.nacti_text("[nápovìda]", text_pom);
+        text_napovedy = string_Cp1250_na_string_Cp852(text_pom);
+    }
+    catch (runtime_error e)
+    {
+        text_napovedy = zalozni_text_napovedy;
+    }
+}
+
 // konstruktor vytvoøí ukazatel na funkci dle asociativního kontejneru tabulky voleb
 volba::volba(int argc, char **argv)
 {
@@ -83,6 +113,7 @@ volba::volba(int argc, char **argv)
     }
     catch (exception &e)
     {
+        nacti_napovedu();
         napoveda();
     }
 }

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <Windows.h>
 #include <iostream>
+#include <filesystem>
 #include "cestina.h"
 
 #include "zajimavosti.h"
@@ -24,6 +25,7 @@
 //#include "18_chyby_za_behu_programu.h"
 //#include "19_vstupy_a_vystupy.h"
 //#include "19_vstupy_a_vystupy_print.h"
+#include "20_inicializace.h"
 #include "20_priklad.h"
 #include "20_priklad_wide.h"
 #include "20_komparatory.h"
@@ -65,7 +67,7 @@ int Tabs::nTabCount = 0; // v C++ staticka promìnná (složka), tøídní složka
 //#define KAP18
 //#define KAP19
 
-// #define SHOW_WORKING_FILE_PATH
+#define SHOW_WORKING_FILE_PATH
 //#define SHOW_USER_LOCALE
 #define KAP20 // sort
 
@@ -80,7 +82,10 @@ int main(int argc, char *argv[], char* env[])
 {
 
 #ifdef SHOW_WORKING_FILE_PATH
-    char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
+    // c++ 2017 -
+    // char *buf = nullptr; cout << "getcwd: " << getcwd(buf, 1024) << endl;
+    // c++ 2017 +
+    cout << std::filesystem::current_path() << endl;
 #endif // SHOW_WORKING_FILE_PATH
 
 #ifdef SHOW_USER_LOCALE
